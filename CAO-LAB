@@ -1,0 +1,85 @@
+mvi a,02
+go:add c
+dcr b
+jnz go
+mov d,a
+hlt
+
+multiply with carry
+
+mvi d,00
+mvi a,00
+mvi b,25
+mvi c,20
+up:add b
+jnz go
+inr d
+go:dcr c
+jnz up
+mov e,a
+hlt
+
+division using register
+
+mvi d,00
+mvi a,00
+mvi b,25
+mvi c,20
+up:add b
+jnz go
+inr d
+go:dcr c
+jnz up
+mov e,a
+hlt
+
+division using memory
+
+lxi h,d000h
+mov b,m
+mvi c,00
+inx h
+mov a,m
+up:cmp b
+jc go
+sub b
+inr c
+jmp up
+go:sta d002h
+mov a,c
+sta d003h
+hlt
+
+find largest number in array
+
+lxi h,4200h
+mov b,m
+inx h
+mov a,m
+dcr b
+up:inx h
+cmp m
+jnc go
+mov a,m
+go:dcr b
+jnz up
+sta 4300h
+hlt
+
+find smallest number in array
+
+lxi h,4200h
+mov c,m
+inx h
+mov a,m
+dcr c
+up:inx h
+mov b,m
+cmp b
+jc go
+mov a,b
+go:dcr c
+jnz up
+inx h
+mov m,a
+hlt
