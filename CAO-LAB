@@ -1,3 +1,79 @@
+add without carry
+
+mvi a,02
+mvi b,01
+add b
+mov c,a
+hlt
+
+add with carry
+
+lda 2050
+mov h,a
+lda 2051
+add h
+mov l,a
+mvi a,00
+adc a
+mov h,a
+shld 3050
+hlt
+ 
+addition from memory
+
+lxi h,2000
+mov a,m
+inx h
+add m
+mov b,a
+hlt
+
+addition from memory and ans in memory
+
+lxi h,2000
+mov a,m
+inx h
+add m
+sta 2002
+hlt
+
+subtraction without carry
+
+lxi h,2000
+mov a,m
+inx h
+sub m
+sta 2002
+hlt
+
+subtraction with carry
+
+MVI	C,00H	
+LHLD 2500H	
+MOV	A,H	
+SUB	L	
+JNC	GO	
+INR	C	
+GO:STA 2502H	
+MOV	A, C	
+STA	2503H	
+HLT
+
+subtraction using 2's complememt
+
+mvi b,95
+mvi c,99
+mov a,c
+cma
+inr a
+add b
+mov d,a
+hlt
+
+multiply without carry
+
+mvi c,03
+mvi b,03
 mvi a,02
 go:add c
 dcr b
